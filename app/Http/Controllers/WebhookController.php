@@ -36,8 +36,8 @@ class WebhookController extends Controller
             //Send Email of successful registration with reference as ticket ID
             $title = 'Event Registration Successful';
 
-            $content = 'Dear '.$response['transaction']['customer']['name']. ', you have successfully registered for <b>Demo Event</b>. 
-                    Your <b>Ticket ID:'. $response['transaction']['reference'] .'</b>. Kindly Show this at the entrace of the gate.';
+            $content = 'Dear '.$response['transaction']['customer']['name']. ', you have successfully registered for Demo Event. 
+                    Your Ticket ID:'. $response['transaction']['reference'] .'. Kindly show this email at the entrace of the gate.';
 
             Mail::send('emails.event', ['title' => $title, 'content' => $content], function ($message) use ($email) {
                 $message->from('demo@epaygh.com', 'Epay Demo');
