@@ -14,14 +14,16 @@ class WebhookController extends Controller
         $pageId = $response['page']['id'];
 
         if ($pageId == 73) {
-            //Send Email of Success registration with reference as ticket ID
+
+            //Send Email of successful registration with reference as ticket ID
             $title = 'Event Registration Successful';
-            $content = 'You have successfully registered for <b>Demo Event</b>. Your <b>Ticket ID:'. $response['transaction']['reference'] .'</b>. Kindly Show this at the entrace of the gate.';
+            $content = 'Dear '.$response['customer']['name']. ', you have successfully registered for <b>Demo Event</b>. 
+                    Your <b>Ticket ID:'. $response['transaction']['reference'] .'</b>. Kindly Show this at the entrace of the gate.';
 
             Mail::send('emails.event', ['title' => $title, 'content' => $content], function ($message) {
                 $message->from('demo@epaygh.com', 'Epay Demo');
 
-                $message->to($email);
+                $message->to($response['customer']['email']);
             });
         }
     }
