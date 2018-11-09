@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class WebhookController extends Controller
 {
@@ -10,20 +11,23 @@ class WebhookController extends Controller
     {
         $body = $request->getContent();
         $response = json_decode($body, true);
-
-        $pageId = $response['page']['id'];
+        //return $response;
+        $pageId = $response['transaction']['page']['id'];
 
         if ($pageId == 73) {
-
+            $email = $response['transaction']['customer']['email'];
             //Send Email of successful registration with reference as ticket ID
             $title = 'Event Registration Successful';
-            $content = 'Dear '.$response['customer']['name']. ', you have successfully registered for <b>Demo Event</b>. 
+            $content = 'Dear '.$response['transaction']['customer']['name']. ', you have successfully registered for <b>Demo Event</b>. 
                     Your <b>Ticket ID:'. $response['transaction']['reference'] .'</b>. Kindly Show this at the entrace of the gate.';
 
-            Mail::send('emails.event', ['title' => $title, 'content' => $content], function ($message) {
+            Mail::send('emails.event', ['title' => $title, 'content' => $content], function ($message) use ($email) {
                 $message->from('demo@epaygh.com', 'Epay Demo');
 
-                $message->to($response['customer']['email']);
+                $message->to($email);
+
+                //Add a subject
+                $message->subject("Demo Event Registration");
             });
         }
     }
