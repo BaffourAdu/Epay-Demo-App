@@ -11,39 +11,30 @@ class WebhookController extends Controller
     {
         $body = $request->getContent();
         $response = json_decode($body, true);
-        //return $response;
+
         $pageId = $response['transaction']['page']['id'];
 
         if ($pageId == 73) {
             $email = $response['transaction']['customer']['email'];
 
-            if ($response['transaction']['status'] != 'success') {
-                //Send Email of successful registration with reference as ticket ID
+            if ($response['transaction']['status'] == 'success') {
+                //Compose Email of successful registration with reference as ticket ID
+                $title = 'Event Registration Successful';
+
+                $content = 'Dear '.$response['transaction']['customer']['name']. ', you have successfully registered for Demo Event. 
+                    Your Ticket ID:'. $response['transaction']['reference'] .'. Kindly show this email at the entrace of the gate.';
+            } else {
+                //Compose registration failure Email
                 $title = 'Event Registration Failed';
             
                 $content = 'Dear '.$response['transaction']['customer']['name']. ', we are sorry you were not able to register for this event.
                 We hope you retry again as we investigate if the failure was from our side. Thank you for showing interest in our event.';
-
-                Mail::send('emails.event', ['title' => $title, 'content' => $content], function ($message) use ($email) {
-                    $message->from('demo@epaygh.com', 'Epay Demo');
-
-                    $message->to($email);
-
-                    //Add a subject
-                    $message->subject("Demo Event Registration");
-                });
             }
-            //Send Email of successful registration with reference as ticket ID
-            $title = 'Event Registration Successful';
 
-            $content = 'Dear '.$response['transaction']['customer']['name']. ', you have successfully registered for Demo Event. 
-                    Your Ticket ID:'. $response['transaction']['reference'] .'. Kindly show this email at the entrace of the gate.';
-
+            //Send Email
             Mail::send('emails.event', ['title' => $title, 'content' => $content], function ($message) use ($email) {
                 $message->from('demo@epaygh.com', 'Epay Demo');
-
                 $message->to($email);
-
                 //Add a subject
                 $message->subject("Demo Event Registration");
             });
