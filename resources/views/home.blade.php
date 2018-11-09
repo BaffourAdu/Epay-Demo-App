@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Event Registration</h5>
                     <p class="card-text">An example application which seeks to show how businesses can use Epay for Events.</p>
-                    <a href="#" class="btn btn-primary">Try Demo App</a>
+                    <a href="https://epaygh.com/pay/st-event-demo-app" class="btn btn-primary">Try Demo App</a>
                 </div>
             </div>
         </div>
