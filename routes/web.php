@@ -15,4 +15,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::post('/webhook', 'WebhookController@handle');
+Route::post('/webhook', 'WebhookController@handle')->name('webhook');
+
+Route::get('/demo/bookshop', 'BookshopController@index')->name('demo.bookshop');
+Route::get('/demo/sponsorship', 'SponsorshipController@index')->name('demo.sponsorship');

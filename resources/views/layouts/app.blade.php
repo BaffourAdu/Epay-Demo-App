@@ -18,6 +18,19 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <style>
+            .space-40 {
+                padding: 20px;
+            }
+            
+            .space-20 {
+                padding: 10px;
+            }
+
+            .space-5 {
+                padding: 5px;
+            }
+        </style>
     </head>
     <body>
         @yield('content')

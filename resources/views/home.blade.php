@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Online Bookshop</h5>
                     <p class="card-text">An example application which seeks to show how an online bookshop can integrate Epay.</p>
-                    <a href="#" class="btn btn-primary">Try Demo App</a>
+                    <a href="{{ route('demo.bookshop') }}" class="btn btn-primary">Try Demo App</a>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Sponsorship Purchase</h5>
                     <p class="card-text">An exmaple application demonstrating how a business can use Epay to take subscriptions.</p>
-                    <a href="#" class="btn btn-primary">Try Demo App</a>
+                    <a href="{{ route('demo.sponsorship') }}" class="btn btn-primary">Try Demo App</a>
                 </div>
             </div>
         </div>
